@@ -2,25 +2,128 @@
 <html>
     <head>
         <title>game_of_life</title>
-        
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="styling.css">
-        
     </head>
     <body>
+        <h1>game_of_life</h1>
         
-        <div id="options">
-            <h2>Options</h2>
-            <input id="play" type="button" value="GO">
-        </div>
+        <canvas id="field" width="500" height="500"></canvas>
         
-        <div id="field">
-            <h2>Simulation Field</h2>
+        <script>
+            var canvas = document.getElementById("field");
+            var context = canvas.getContext("2d");
             
-            <canvas id="fieldcanvas" width="50" height="50"></canvas>
-        </div>
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="script/logic.js"></script>
+            var tile_width = 10;
+            var tile_height = 10;
+            
+            var field_width = 50;
+            var field_height = 50;
+            
+            var field = [];
+            
+            var cell_perc = 10; // percentage of the initial fillment of cells
+            
+            init();
+            
+            update();
+            
+            function init(){
+                
+                draw_grid();
+                                
+                init_logic_array();
+                
+                set_random_cells();
+                
+            }
+                    
+            
+            // logic handling --------------------
+            function init_logic_array(){
+                
+                // init logic array
+                for(var i=0; i<=field_width; i++)
+                {
+                    field[i] = [];
+                    for(var j=0; j<=field_height; j++)
+                    {
+                        field[i][j] = 0;
+                    }
+                }
+            }
+            
+            function spawn_cell(x, y){
+                
+                // spawn cell in the logic array
+                field[x][y] = 1;
+            }
+            
+            function kill_cell(x, y){
+                
+                // spawn cell in the logic array
+                field[x][y] = 0;
+            }
+            
+            function set_random_cells(){
+                for(var i=0; i<=cell_perc-1; i++)
+                {
+                    var x = Math.floor(Math.random() * 50);
+                    var y = Math.floor(Math.random() * 50);
+
+                    spawn_cell(x, y);    
+                }
+            }
+            
+            
+            // drawing on canvas --------------------
+            function draw_grid(){
+                
+                // draw grid lines
+                for(var i=0; i<=500; i += 10)
+                {
+                    context.moveTo(i, 0);
+                    context.lineTo(i, 500);
+                }
+                
+                for(var j=0; j<=500; j += 10)
+                {
+                    context.moveTo(0, j);
+                    context.lineTo(500, j);
+                }
+                
+                context.strokeStyle = "lightgrey";
+                context.stroke(); 
+            }
+            
+            function update(){
+                for(var i=0; i<=field_width; i++)
+                {
+                    for(var j=0; j<=field_height; j++)
+                        {
+                            if(field[i][j]==1)
+                            {
+                                draw_cell(i, j);
+                            }else
+                                {
+                                    clear_cell(i, j);
+                                }
+                        }    
+                }
+                draw_grid();
+            }
+            
+            function draw_cell(x, y){
+                
+                // draw cell on canvas
+                context.fillRect(x*tile_width, y*tile_height, tile_width, tile_height);
+            }
+            
+            function clear_cell(x, y){
+                
+                // clear cell on canvas
+                context.clearRect(x*tile_width, y*tile_height, tile_width, tile_height);
+            }
+            
+            
+        </script>
     </body>
 </html>
