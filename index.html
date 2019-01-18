@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
-<body>
+    <head>
+        <title>game_of_life</title>
+        
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="styling.css">
+        
+    </head>
+    <body>
+        
+        <div id="options">
+            <h2>Options</h2>
+        </div>
+        
+        <div id="field">
+            <h2>Simulation Field</h2>
+        </div>
 
-<canvas id="myCanvas" width="200" height="100"
-style="border:1px solid #c3c3c3;">
-Your browser does not support the canvas element.
-</canvas>
-
-<script>
-var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");
-ctx.fillStyle = "#FF0000";
-ctx.fillRect(0,0,200,100);
-</script>
-
-</body>
+    </body>
 </html>

@@ -1,0 +1,11 @@
+
+#options {
+    border: 1px solid black;
+    float: left;
+    width: 20%;
+    height: 100%;
+}
+
+#field {
+    border: 1px solid black;
+}
