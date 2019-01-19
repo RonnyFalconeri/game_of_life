@@ -20,11 +20,19 @@
             <label>Speed </label>
             <input id="speed" type="range" value="150" min="0" max="300">
             
+            <br>
+            <label>X-Field Size </label>
+            <input id="size_x" type="number" value="50" min="10" max="100">
+            
+            <br>
+            <label>Y-Field Size </label>
+            <input id="size_y" type="number" value="50" min="10" max="100">
+            
             
         </div>
         
         <div id="display">
-            <canvas id="field" width="500" height="500"></canvas>
+            <canvas id="field" width="1000" height="1000"></canvas>
         </div>
         
         <script>
@@ -36,6 +44,8 @@
             
             var field_width = 50;
             var field_height = 50;
+            var field_width_tmp = 50;
+            var field_height_tmp = 50;
             
             var field = [];
             var field_tmp = [];
@@ -94,8 +104,8 @@
                 // placing cells at random locations
                 for(var i=0; i<=parseInt((field_height*field_width)*(cell_perc/100)); i++)
                 {
-                    var x = Math.floor(Math.random() * 50);
-                    var y = Math.floor(Math.random() * 50);
+                    var x = Math.floor(Math.random() * field_width);
+                    var y = Math.floor(Math.random() * field_height);
 
                     field[x][y] = 1;    
                 }
@@ -115,11 +125,10 @@
             }
             
             function count_cells_neighbours(x, y){
-                // console.log("checking neighbours of cell: "+x+", "+y);
-                // count neighbours of one specific cell
+                
                 var neighbours = 0;
                 
-                if(x > 0 && x < 49 && y > 0 && y < 49)
+                if(x > 0 && x < (field_width-1) && y > 0 && y < (field_height-1))
                 {
                     if(field[x-1][y+1] == 1) neighbours++;
                     if(field[x][y+1] == 1) neighbours++;
@@ -131,16 +140,13 @@
                     if(field[x+1][y-1] == 1) neighbours++;    
                 }else
                     {
-                        // to be checked
+                        // borders are dead
                         neighbours = 2;
                     }
-                
-                console.log("checking neighbours of cell("+x+", "+y+"): "+neighbours);
                 
                 if(neighbours == 3) field_tmp[x][y] = 1;
                 if(neighbours < 2) field_tmp[x][y] = 0;
                 if(neighbours > 3) field_tmp[x][y] = 0;
-                
                 
             }
             
@@ -170,16 +176,16 @@
             function draw_grid(){
                 
                 // draw grid lines
-                for(var i=0; i<=500; i += 10)
+                for(var i=0; i<=(field_width*10); i += 10)
                 {
                     context.moveTo(i, 0);
-                    context.lineTo(i, 500);
+                    context.lineTo(i, (field_height*10));
                 }
                 
-                for(var j=0; j<=500; j += 10)
+                for(var j=0; j<=(field_height*10); j += 10)
                 {
                     context.moveTo(0, j);
-                    context.lineTo(500, j);
+                    context.lineTo((field_width*10), j);
                 }
                 
                 context.strokeStyle = "lightgrey";
@@ -216,7 +222,7 @@
             }
             
             
-            // options            
+            // options --------------------
             document.getElementById("go").addEventListener("click", function(){
                 
                 play_simulation = true;
@@ -232,6 +238,8 @@
             
             document.getElementById("reset").addEventListener("click", function(){
                 
+                field_width = field_width_tmp;
+                field_height = field_height_tmp;
                 init();
                 
             });
@@ -239,13 +247,24 @@
             document.getElementById("percentage").addEventListener("change", function(){
                 
                 cell_perc = document.getElementById("percentage").value;
-                init();
                 
             });
             
             document.getElementById("speed").addEventListener("change", function(){
                 
                 simulation_speed = (300 - document.getElementById("speed").value);
+                
+            });
+            
+            document.getElementById("size_x").addEventListener("change", function(){
+                
+                field_width_tmp = document.getElementById("size_x").value;
+                
+            });
+            
+            document.getElementById("size_y").addEventListener("change", function(){
+                
+                field_height_tmp = document.getElementById("size_y").value;
                 
             });
             
