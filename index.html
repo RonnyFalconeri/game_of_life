@@ -6,7 +6,16 @@
     <body>
         <h1>game_of_life</h1>
         
-        <canvas id="field" width="500" height="500"></canvas>
+        <div id="options">
+            <h2>Options</h2>
+            <input id="go" type="button" value="GO">
+            <input id="stop" type="button" value="STOP">
+            <input id="reset" type="button" value="RESET">
+        </div>
+        
+        <div id="display">
+            <canvas id="field" width="500" height="500"></canvas>
+        </div>
         
         <script>
             var canvas = document.getElementById("field");
@@ -21,17 +30,20 @@
             var field = [];
             var field_tmp = [];
             
-            var cell_perc = 60; // percentage of the initial fillment of cells
-            
+            // option values
+            var cell_perc = 60; 
             var simulation_speed = 150;
+            var play_simulation = true;
+            
             
             init();
             
-            cycle();
                     
             
             // logic handling --------------------
             function cycle(){
+                
+                if(!play_simulation) return;
                 
                 check_rules();
                 update_field();
@@ -192,6 +204,27 @@
                 // clear cell on canvas
                 context.clearRect(x*tile_width, y*tile_height, tile_width, tile_height);
             }
+            
+            
+            // options            
+            document.getElementById("go").addEventListener("click", function(){
+                
+                play_simulation = true;
+                cycle();
+                
+            });
+            
+            document.getElementById("stop").addEventListener("click", function(){
+                
+                play_simulation = false;
+                
+            });
+            
+            document.getElementById("reset").addEventListener("click", function(){
+                
+                init();
+                
+            });
             
             
         </script>
