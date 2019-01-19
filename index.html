@@ -3,39 +3,48 @@
     <head>
         <title>game_of_life</title>
     </head>
-    <body>
+    <body style="background-color: lightgray;">
         <h1>game_of_life</h1>
         
-        <div id="options">
+        <div id="options" style="float: left; width: 20%; background-color: white; border: 1px solid black; margin: 0 10px 10px 10px; padding: 5px;">
             <h2>Options</h2>
-            <input id="go" type="button" value="GO">
-            <input id="stop" type="button" value="STOP">
-            <input id="reset" type="button" value="RESET">
             
-            <br>
-            <label>Cell Percentage </label>
-            <input id="percentage" type="range" value="60" min="0" max="100">
+            <div style="margin: 5px;">
+                <input id="go" type="button" value="GO">
+                <input id="stop" type="button" value="STOP">
+                <input id="reset" type="button" value="RESET">
+            </div>
+             
             
-            <br>
-            <label>Speed </label>
-            <input id="speed" type="range" value="150" min="0" max="300">
+            <div style="margin: 5px;">
+                <label>Cell Percentage </label>
+                <input id="percentage" type="range" value="60" min="0" max="100">
+            </div>
             
-            <br>
-            <label>X-Field Size </label>
-            <input id="size_x" type="number" value="50" min="10" max="100">
+            <div style="margin: 5px;">
+                <label>Speed </label>
+                <input id="speed" type="range" value="150" min="0" max="300">
+            </div>
             
-            <br>
-            <label>Y-Field Size </label>
-            <input id="size_y" type="number" value="50" min="10" max="100">
+            <div style="margin: 5px;">
+                <label>X-Field Size </label>
+                <input id="size_x" type="number" value="50" min="10" max="100">
+            </div>
             
-            <br>
-            <label>Cell Color </label>
-            <input id="cell_color_input" type="color" value="#000000">
+            <div style="margin: 5px;">
+                <label>Y-Field Size </label>
+                <input id="size_y" type="number" value="50" min="10" max="100">
+            </div>
             
-            <br>
-            <label>Field Color </label>
-            <input id="field_color_input" type="color" value="#ffffff">
+            <div style="margin: 5px;">
+                <label>Cell Color </label>
+                <input id="cell_color_input" type="color" value="#000000">
+            </div>
             
+            <div style="margin: 5px;">
+                <label>Field Color </label>
+                <input id="field_color_input" type="color" value="#ffffff">
+            </div>
             
         </div>
         
