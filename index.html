@@ -11,6 +11,16 @@
             <input id="go" type="button" value="GO">
             <input id="stop" type="button" value="STOP">
             <input id="reset" type="button" value="RESET">
+            
+            <br>
+            <label>Cell Percentage </label>
+            <input id="percentage" type="range" value="60" min="0" max="100">
+            
+            <br>
+            <label>Speed </label>
+            <input id="speed" type="range" value="150" min="0" max="300">
+            
+            
         </div>
         
         <div id="display">
@@ -223,6 +233,19 @@
             document.getElementById("reset").addEventListener("click", function(){
                 
                 init();
+                
+            });
+            
+            document.getElementById("percentage").addEventListener("change", function(){
+                
+                cell_perc = document.getElementById("percentage").value;
+                init();
+                
+            });
+            
+            document.getElementById("speed").addEventListener("change", function(){
+                
+                simulation_speed = (300 - document.getElementById("speed").value);
                 
             });
             
