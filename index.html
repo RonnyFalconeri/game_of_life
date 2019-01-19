@@ -28,6 +28,14 @@
             <label>Y-Field Size </label>
             <input id="size_y" type="number" value="50" min="10" max="100">
             
+            <br>
+            <label>Cell Color </label>
+            <input id="cell_color_input" type="color" value="#000000">
+            
+            <br>
+            <label>Field Color </label>
+            <input id="field_color_input" type="color" value="#ffffff">
+            
             
         </div>
         
@@ -54,6 +62,8 @@
             var cell_perc = 60; 
             var simulation_speed = 150;
             var play_simulation = true;
+            var cell_color = "#000000";
+            var field_color = "#ffffff";
             
             
             init();
@@ -73,6 +83,8 @@
             }
             
             function init(){
+                
+                draw_background();
                 
                 draw_grid();
                                 
@@ -173,6 +185,13 @@
             
             
             // drawing on canvas --------------------
+            function draw_background(){
+                
+                // colors the background
+                context.fillStyle = field_color;
+                context.fillRect(0, 0, field_width*10, field_height*10);
+            }
+            
             function draw_grid(){
                 
                 // draw grid lines
@@ -193,9 +212,9 @@
             }
             
             function draw_update(){
-                for(var i=0; i<=field_width; i++)
+                for(var i=0; i<=field_width-1; i++)
                 {
-                    for(var j=0; j<=field_height; j++)
+                    for(var j=0; j<=field_height-1; j++)
                         {
                             if(field[i][j]==1)
                             {
@@ -212,13 +231,15 @@
             function draw_cell(x, y){
                 
                 // draw cell on canvas
+                context.fillStyle = cell_color;
                 context.fillRect(x*tile_width, y*tile_height, tile_width, tile_height);
             }
             
             function clear_cell(x, y){
                 
                 // clear cell on canvas
-                context.clearRect(x*tile_width, y*tile_height, tile_width, tile_height);
+                context.fillStyle = field_color;
+                context.fillRect(x*tile_width, y*tile_height, tile_width, tile_height);
             }
             
             
@@ -265,6 +286,18 @@
             document.getElementById("size_y").addEventListener("change", function(){
                 
                 field_height_tmp = document.getElementById("size_y").value;
+                
+            });
+            
+            document.getElementById("cell_color_input").addEventListener("change", function(){
+                
+                cell_color = document.getElementById("cell_color_input").value;
+                
+            });
+            
+            document.getElementById("field_color_input").addEventListener("change", function(){
+                
+                field_color = document.getElementById("field_color_input").value;
                 
             });
             
