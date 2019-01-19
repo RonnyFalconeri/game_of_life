@@ -20,11 +20,19 @@
             
             var field = [];
             
-            var cell_perc = 10; // percentage of the initial fillment of cells
+            var cell_perc = parseInt((field_height*field_width)*(60/100)); // percentage of the initial fillment of cells
             
             init();
             
-            update();
+            //cycle();
+                    
+            
+            // logic handling --------------------
+            function cycle(){
+                
+                
+                setTimeout(cycle, 200);
+            }
             
             function init(){
                 
@@ -34,10 +42,10 @@
                 
                 set_random_cells();
                 
+                draw_update();
+                
             }
-                    
             
-            // logic handling --------------------
             function init_logic_array(){
                 
                 // init logic array
@@ -64,13 +72,43 @@
             }
             
             function set_random_cells(){
-                for(var i=0; i<=cell_perc-1; i++)
+                for(var i=0; i<=cell_perc; i++)
                 {
                     var x = Math.floor(Math.random() * 50);
                     var y = Math.floor(Math.random() * 50);
 
                     spawn_cell(x, y);    
                 }
+            }
+            
+            function check_rules(){
+                // check each cells neighbours
+            }
+            
+            function count_cells_neighbours(x, y){
+                
+                // count neighbours of one specific cell
+                var neighbours = 0;
+                
+                if(x > 0 && x < 49 && y > 0 && y < 49)
+                {
+                    if(field[x-1][y+1] = 1) neighbours++;
+                    if(field[x][y+1] = 1) neighbours++;
+                    if(field[x+1][y+1] = 1) neighbours++;
+                    if(field[x-1][y] = 1) neighbours++;
+                    if(field[x+1][y] = 1) neighbours++;
+                    if(field[x-1][y-1] = 1) neighbours++;
+                    if(field[x][y-1] = 1) neighbours++;
+                    if(field[x+1][y-1] = 1) neighbours++;    
+                }else
+                    {
+                        if(x == 0)
+                        {
+                            // borders
+                        }
+                    }
+                
+                
             }
             
             
@@ -94,7 +132,7 @@
                 context.stroke(); 
             }
             
-            function update(){
+            function draw_update(){
                 for(var i=0; i<=field_width; i++)
                 {
                     for(var j=0; j<=field_height; j++)
