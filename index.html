@@ -59,6 +59,8 @@
             var tile_width = 10;
             var tile_height = 10;
             
+            var tile_edge = 10;
+            
             var field_width = 50;
             var field_height = 50;
             var field_width_tmp = 50;
@@ -203,13 +205,13 @@
             function draw_grid(){
                 
                 // draw grid lines
-                for(var i=0; i<=(field_width*10); i += 10)
+                for(var i=0; i<=(field_width*10); i += tile_edge)
                 {
                     context.moveTo(i, 0);
                     context.lineTo(i, (field_height*10));
                 }
                 
-                for(var j=0; j<=(field_height*10); j += 10)
+                for(var j=0; j<=(field_height*10); j += tile_edge)
                 {
                     context.moveTo(0, j);
                     context.lineTo((field_width*10), j);
@@ -240,14 +242,14 @@
                 
                 // draw cell on canvas
                 context.fillStyle = cell_color;
-                context.fillRect(x*tile_width, y*tile_height, tile_width, tile_height);
+                context.fillRect(x*tile_width, y*tile_height, tile_edge, tile_edge);
             }
             
             function clear_cell(x, y){
                 
                 // clear cell on canvas
                 context.fillStyle = field_color;
-                context.fillRect(x*tile_width, y*tile_height, tile_width, tile_height);
+                context.fillRect(x*tile_width, y*tile_height, tile_edge, tile_edge);
             }
             
             
